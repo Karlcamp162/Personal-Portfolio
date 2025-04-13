@@ -96,14 +96,14 @@ header h1{
         width: 10vw;
         height: 5vh;
         background-color: #55e1b8;
-        border-color: #d8bbfe;
+        border-color: #b14f87;
         right: 1rem;
     }
     .btnIcon{
         color: #fdfeff;
         font-size: 1.5rem;
         box-shadow: #5d33bd;
-
+        border-color: #b14f87;
     }
 
     .DropContent{
