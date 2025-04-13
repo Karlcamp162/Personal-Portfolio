@@ -1,0 +1,62 @@
+header{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    background-color: #2f1a5a;
+    position: absolute;
+}
+
+.links{
+    display: flex;
+    margin: 1rem;
+    max-width: 35vw;
+
+}
+
+header h1{
+    font-family: "Pixelette";
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    pointer-events: none;
+    cursor: default;
+    user-select: none;
+}
+
+.links a{
+    padding: 0 1rem;
+    font-size: 1.2rem;
+    font-family: "Pixelette";
+}
+
+.links a:hover{
+    color: #f6da71;
+}
+
+
+
+@font-face {
+    font-family: 'Pixelette'; /* Pick a name */
+    src: url('../../assets/fonts/Pixelette.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media screen and (max-width: 1040px) {
+    header{
+        flex-direction: column;
+        width: 100vw;
+    }
+    .links a{
+        font-size: 1.1rem;
+        padding: 0,5rem;
+        left: 0;
+        top: 0;
+    }
+    .links h1{
+        
+    }
+}
