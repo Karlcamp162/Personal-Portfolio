@@ -6,7 +6,7 @@ header{
     box-sizing: border-box;
     align-items: center;
     background-color: #2f1a5a;
-    position: absolute;
+    
 }
 
 .links{
@@ -67,7 +67,7 @@ header h1{
     header{
         flex-direction: column;
         width: 100vw;
-        position: absolute;
+        
     }
     .links a{
         font-size: 1.1rem;
