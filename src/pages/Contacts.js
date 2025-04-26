@@ -1,14 +1,14 @@
 import React from 'react'
 import NavBar from './components/NavBar'
 
-const Project = () => {
+const Contacts = () => {
   return (
     <>
     <NavBar/>
 
-    <h1>Projects</h1>
+    <h1>Contactss</h1>
   </>
   )
 }
 
-export default Project
+export default Contacts

@@ -17,16 +17,16 @@ function NavBar() {
         {isdrop && (
         <div className="DropContent">
             <Link to={"/"}>Home</Link>
-            <Link to={"/project"}>Projects</Link>
             <Link to={"/gallery"}>Gallery</Link>
+            <Link to={"/contacts"}>Contacts</Link>
         </div>
         )}
         </div>
 
         <div className="links">
             <Link to={"/"}>Home</Link>
-            <Link to={"/project"}>Projects</Link>
             <Link to={"/gallery"}>Gallery</Link>
+            <Link to={"/contacts"}>Contacts</Link>
         </div>
         
         

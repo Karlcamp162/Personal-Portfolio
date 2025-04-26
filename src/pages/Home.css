@@ -1,7 +1,7 @@
 *{
     font-family: "Pixelette";
 }
-container{
+.container{
     display: flex;
     background-color: #d3b4fe;
     height: 80vh;
@@ -12,9 +12,10 @@ container{
     align-items: center;
     border-radius: 20px;
     border: 4px solid #370183;
+    flex-wrap: wrap;
 }
 
-container h1{
+.container h1{
     font-weight: bold;
     color: #fef5ff;
     user-select: none;
@@ -32,11 +33,14 @@ container h1{
 }
 .profile{
     background-color: #a983fc;
+    max-width: 100%;
     width: 100%;
-    height: 13%;
+    height: 14%;
     bottom: 0;
     flex-direction: row;
     display: flex;
+    align-items: center;
+    border-bottom: 5px solid #f8d473 ;
 }
 .profile h3{
     margin-right: 1rem;
@@ -45,6 +49,7 @@ container h1{
 .profile p{
     margin-right: 1rem;
     color: #fcfdf5;
+    
 }
 
 .class_row1, .class_row2{
@@ -53,9 +58,6 @@ container h1{
     margin-bottom: 0.5rem;
     margin-top: 0.3rem;
 }
-
-
-
 
 .profile .class{
     margin-right: 1rem;
@@ -66,6 +68,51 @@ container h1{
     height: 10vh;
 }
 
+.healthIcon, .manaIcon{
+    height: 1.7rem;
+    margin-right: 0.5rem;
+}
+.healthBarIcon, .manaBarIcon{
+    height: 1.7rem;
+    margin-left: 1rem;
+    width:10rem;
+}
+.languages{
+    width: 50%;
+    height: auto;
+    background-color: #9c1ed7;
+    padding: 1rem;
+    left: 0;
+    position: relative;
+    align-self: flex-start;
+    justify-content: flex-start;
+    flex: 1;
+    border-bottom-left-radius: 17px;
+}
+.languages h2{
+    justify-self: center;
+    color: #e0dfe2;
+    user-select: none;
+}
+
+
+.lang, .lang p:hover{
+    color: #f8d473;
+}
+.lang{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    user-select: none;
+    width: 10rem;
+    transition: 0.5s;
+}
+.lang p{
+    margin-left: 1rem;
+    color: #fcfdf5;
+    transition: color 0.2s ease;
+}
+
 
 
 @font-face {
@@ -74,3 +121,38 @@ container h1{
     font-weight: normal;
     font-style: normal;
 }
+
+@media screen and (max-width: 720px) {
+    .profile {
+      flex-direction: column;
+      text-align: left;
+      width: 100%;
+      height: auto;
+      padding-left: 0.5rem;
+    }
+    .container{
+        height: auto;
+    }
+    .class{
+        flex-direction: row;
+    }
+  
+    .class_row1, .class_row2 {
+      flex-direction: row;
+      gap: 0.3rem;
+    }
+  
+    .profile_pic {
+      height: 8vh;
+      margin-bottom: 1rem;
+    }
+  
+    .healthBarIcon, .manaBarIcon {
+      max-width: 17rem;
+      width: 100vw;
+    }
+    .languages{
+        padding-left: 0.5rem;
+    }
+  }
+  

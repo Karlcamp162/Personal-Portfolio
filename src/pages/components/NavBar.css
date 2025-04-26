@@ -6,13 +6,14 @@ header{
     box-sizing: border-box;
     align-items: center;
     background-color: #2f1a5a;
-    
+
 }
 
 .links{
     display: flex;
     margin: 1rem;
     max-width: 35vw;
+    
 
 }
 .DropContent{
@@ -29,12 +30,14 @@ header h1{
     margin-top: 0.5rem;
     cursor: default;
     user-select: none;
+    transition: color 0.2s ease;
 }
 
 .links a{
     padding: 0 1rem;
     font-size: 1.2rem;
     font-family: "Pixelette";
+    transition: color 0.2s ease;
 }
 
 .links a:hover, header h1:hover{
