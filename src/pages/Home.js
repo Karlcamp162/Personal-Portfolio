@@ -1,75 +1,56 @@
-import React from 'react'
+import React from 'react';
 import NavBar from './components/NavBar';
-import "./Home.css";
-import { FaPython, FaJava  } from "react-icons/fa";
-import { DiRuby } from "react-icons/di";
-import { TbBrandCpp } from "react-icons/tb";
-import { SiLua, SiPhp } from "react-icons/si";
-import { IoLogoJavascript } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
     <>
-      <NavBar/>
-      <div className='container'>
-        <div className='title'>
-          <h1>Character Information</h1>
+      <NavBar />
+      <img
+        src="/road.png"
+        className="fixed bottom-0 w-full object-cover z-[-1] h-[60px] sm:h-[80px] lg:h-[100px]"
+        alt="road_img"
+      />
+
+      <div className="flex flex-col items-center justify-center animate-fade-in px-4 sm:px-6 lg:px-8 mt-4 sm:mt-8 lg:mt-6 mb-20">
+        <div className="text-center">
+          <p className="text-5xl sm:text-7xl lg:text-9xl font-bold text-yellow-300 leading-tight">
+            Welcome to My
+          </p>
+          <p className="text-5xl sm:text-7xl lg:text-9xl font-bold text-yellow-300 mb-4 sm:mb-6 lg:mb-8">
+            World of Retro
+          </p>
         </div>
-        <div className='profile'>
-            <img src='/character_scratch.png' alt='Profile pic' className='profile_pic'/>
-            <div className='class'>
-              <div className='class_row1'>
-                <h3>Name:</h3> <p>Karl Louise M. Campos </p>
-                
-              </div>
-              <div className='class_row2'>
-              <h3>Course: </h3><p>BS-Computer Science</p>
-              </div>
-            </div>
-            <div className='class'>
-              <div className='class_row1'>
-                  <h3>Lvl:</h3> <p>3rd yr. College Student</p>
-              </div>
-              <div className='class_row2'>
-                  <h3>Age:</h3> <p>21</p>
-              </div>
-            </div>
-            <div className='class'>
-              <div className='class_row1'>
-                  <img src='/health.png' alt='Health icon' className='healthIcon'/><h3>HP</h3> <img src='/healthBar.png' alt='HealthBar icon' className='healthBarIcon'/> 
-              </div>
-              <div className='class_row2'>
-              <img src='/mana.png' alt='Mana icon' className='manaIcon'/> <h3>MP</h3> <img src='/manaBar.png' alt='ManaBar icon' className='manaBarIcon'/>
-              </div>
-            </div>
-        </div>
-        <div className='languages'>
-          <h2>Programming Languages</h2>
-          <div className='lang'>
-              <FaPython size={30}/><p>Python</p>
-          </div>
-          <div className='lang'>
-              <FaJava size={30}/><p>Java</p>
-          </div>
-          <div className='lang'>
-              <DiRuby size={30}/><p>Ruby</p>
-          </div>
-          <div className='lang'>
-              <TbBrandCpp size={30}/><p>c++</p>
-          </div>
-          <div className='lang'>
-              <SiLua size={30}/><p>LUA</p>
-          </div>
-          <div className='lang'>
-              <SiPhp size={30}/><p>PHP</p>
-          </div>
-          <div className='lang'>
-              <IoLogoJavascript size={30}/><p>JavaScript</p>
-          </div>
+        <p className="text-lg sm:text-xl lg:text-2xl text-white text-center">
+          Explore my portfolio of retro-inspired design.
+        </p>
+        <p className="text-lg sm:text-xl lg:text-2xl text-white text-center mb-4 sm:mb-6 lg:mb-8">
+          See details in Every Pixel!
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-xl px-4 mb-8">
+          <Link
+            to="/gallery"
+            className="bg-purple-700 h-12 sm:h-14 lg:h-16 w-full sm:w-60 flex items-center justify-center text-white text-lg hover:bg-purple-400 hover:text-yellow-300 hover:scale-110 transition-all duration-300"
+          >
+            Browse Gallery
+          </Link>
+
+          <Link
+            to="/profile"
+            className="bg-cyan-500 h-12 sm:h-14 lg:h-16 w-full sm:w-60 flex items-center justify-center text-white text-lg hover:bg-purple-400 hover:text-yellow-300 hover:scale-110 transition-all duration-300"
+          >
+            See Profile
+          </Link>
         </div>
       </div>
+
+      {/* eslint-disable-next-line jsx-a11y/no-distracting-elements */}
+      <marquee behavior="alternate" direction="right" scrollAmount="8" className="fixed bottom-[35px] sm:bottom-[45px] lg:bottom-[60px] z-[-1]">
+        <img src="/mob.png" alt="Moving Mob" className="h-[30px] sm:h-[40px] lg:h-[50px] m-1"/>
+      </marquee>
     </>
-  )
-}
+  );
+};
 
 export default Home;

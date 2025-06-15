@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -13,3 +17,10 @@ h1, h4, p, a{
   color: #fff;
   text-decoration: none;
 }
+
+@font-face {
+  font-family: 'Pixelette'; /* Pick a name */
+  src: url('./assets/fonts/Pixelette.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}  

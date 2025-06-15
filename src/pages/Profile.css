@@ -1,0 +1,235 @@
+*{
+    font-family: "Pixelette";
+}
+.container{
+    display: flex;
+    background-color: #d3b4fe;
+    height: 80vh;
+    width: 90vw;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 1rem auto;
+    align-items: center;
+    border-radius: 20px;
+    border: 4px solid #370183;
+}
+
+.title{
+    width: 100%;
+    height: 10%;
+    background-color: #370183;
+    text-align: center;
+    border-bottom: 5px solid #f8d473;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title h1{
+    font-weight: bold;
+    color: #fef5ff;
+    user-select: none;
+    margin: 0;
+}   
+
+.profile{
+    background-color: #a983fc;
+    width: 100%;
+    height: 14%;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 5px solid #f8d473;
+}
+
+.profile h3{
+    color: #a1fcde;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.profile p{
+    color: #fcfdf5;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.class_row1, .class_row2{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.profile .class{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile_pic{
+    height: 10vh;
+    width: auto;
+    object-fit: contain;
+}
+
+.healthIcon, .manaIcon{
+    height: 1.7rem;
+    width: auto;
+}
+
+.healthBarIcon, .manaBarIcon{
+    height: 1.7rem;
+    width: 10rem;
+    max-width: 100%;
+}
+
+.languages{
+    width: 50%;
+    height: 76%;
+    background-color: #9c1ed7;
+    padding: 1rem;
+    align-self: flex-start;
+    border-bottom-left-radius: 15px;
+}
+
+.title2{
+    color: #f8d473;
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+}
+
+.col-1, .col-2{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.lang{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.lang:hover, .lang:hover p{
+    transform: translateY(-2px);
+    color: #f8d473;
+}
+
+.lang p{
+    color: #fcfdf5;
+    margin: 0;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.biography{
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.biography p{
+    color: #fcfdf5;
+    line-height: 1.4;
+    margin: 0;
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .languages {
+        width: 100%;
+        border-bottom-right-radius: 15px;
+    }
+
+    .col-1, .col-2 {
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        height: auto;
+        width: 95%;
+        margin: 0.5rem auto;
+    }
+
+    .profile {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1rem;
+        gap: 1rem;
+        height: auto;
+    }
+
+    .profile_pic {
+        height: 100px;
+    }
+
+    .class {
+        width: 100%;
+    }
+
+    .class_row1, .class_row2 {
+        justify-content: center;
+    }
+
+    .healthBarIcon, .manaBarIcon {
+        width: 8rem;
+    }
+
+    .languages {
+        padding: 1rem;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 98%;
+        margin: 0.25rem auto;
+    }
+
+    .title h1 {
+        font-size: 1.25rem;
+    }
+
+    .profile_pic {
+        height: 80px;
+    }
+
+    .profile h3, .profile p {
+        font-size: 0.9rem;
+    }
+
+    .healthIcon, .manaIcon {
+        height: 1.4rem;
+    }
+
+    .healthBarIcon, .manaBarIcon {
+        height: 1.4rem;
+        width: 6rem;
+    }
+
+    .title2 {
+        font-size: 1.25rem;
+    }
+
+    .lang p {
+        font-size: 0.9rem;
+    }
+
+    .biography p {
+        font-size: 0.9rem;
+    }
+}
+  
