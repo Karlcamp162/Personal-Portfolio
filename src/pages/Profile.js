@@ -34,7 +34,7 @@ function Profile() {
             <div className='class'>
               <div className='class_row1'>
                 <h3>Lvl:</h3>
-                <p>3rd yr. College Student</p>
+                <p>3rd yr. Undergraduate Student</p>
               </div>
               <div className='class_row2'>
                 <h3>Age:</h3>

@@ -52,10 +52,6 @@ const Gallery = () => {
     setExpanded(prev => ({ ...prev, [cat]: !prev[cat] }))
   }
 
-  const openModal = (img) => {
-    setSelectedImage(img)
-    setModalOpen(true)
-  }
   const closeModal = () => {
     setModalOpen(false)
     setSelectedImage(null)
@@ -66,10 +62,10 @@ const Gallery = () => {
       <NavBar/>
       <div className='animate-fade-in'>
         <div className='flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4'>
-          <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-white text-center mb-8 text-yellow-300'>
+          <h1 className='font-pixel text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-white text-center mb-8 text-yellow-300'>
             the Pixel Gallery
           </h1>
-          <h2 className='text-lg sm:text-xl md:text-2xl text-white text-center max-w-2xl mb-12'>
+          <h2 className='font-pixel text-lg sm:text-xl md:text-2xl text-white text-center max-w-2xl mb-12'>
             Press start to Explore my Gallery of Projects and Achievements
           </h2>
           <ScrollLink
@@ -102,8 +98,7 @@ const Gallery = () => {
               smooth={true}
               duration={500}
               offset={-40}
-              className={`px-4 py-2 rounded-lg font-bold text-sm transition-colors duration-200 border-2 border-purple-700 cursor-pointer select-none ${activeCategory === cat.key ? 'bg-yellow-300 text-purple-900' : 'bg-purple-800 text-yellow-300 hover:bg-purple-700'}`}
-              style={{fontFamily: 'monospace'}}
+              className={`font-pixel px-4 py-2 rounded-lg font-bold text-sm transition-colors duration-200 border-2 border-purple-700 cursor-pointer select-none ${activeCategory === cat.key ? 'bg-yellow-300 text-purple-900' : 'bg-purple-800 text-yellow-300 hover:bg-purple-700'}`}
               onSetActive={() => setActiveCategory(cat.key)}
               onClick={() => setActiveCategory(cat.key)}
             >
@@ -116,11 +111,10 @@ const Gallery = () => {
           {/* Projects Section */}
           <ScrollElement name="projects">
             <div className="w-full flex flex-row items-center justify-between mb-8 px-2">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-widest" style={{fontFamily: '"Press Start 2P", monospace'}}>PROJECTS</h2>
+              <h2 className="font-pixel text-3xl sm:text-4xl font-bold text-white tracking-widest">PROJECTS</h2>
               <button
-                className="text-green-200 text-base sm:text-lg font-bold hover:text-yellow-300 transition-colors duration-200 tracking-wider"
+                className="font-pixel text-green-200 text-base sm:text-lg font-bold hover:text-yellow-300 transition-colors duration-200 tracking-wider"
                 onClick={() => handleExpand('projects')}
-                style={{fontFamily: 'monospace'}}
               >
                 {expanded.projects ? 'SEE LESS <' : 'SEE MORE >'}
               </button>
@@ -150,7 +144,7 @@ const Gallery = () => {
                   >
                     {/* Optional badge */}
                     {idx === 0 && !expanded.projects && (
-                      <div className="absolute top-4 right-4 bg-blue-200 text-xs font-bold text-black px-3 py-1 rounded-md shadow-md tracking-widest" style={{fontFamily: 'monospace'}}>NEW</div>
+                      <div className="font-pixel absolute top-4 right-4 bg-blue-200 text-xs font-bold text-black px-3 py-1 rounded-md shadow-md tracking-widest">NEW</div>
                     )}
                     {/* Project image */}
                     <div className="w-full flex justify-center mt-6 mb-4">
@@ -164,26 +158,25 @@ const Gallery = () => {
                     </div>
                     {/* Title and rating */}
                     <div className="w-full px-4 flex flex-row items-center justify-between mb-2">
-                      <div className="text-white text-lg font-bold tracking-wider" style={{fontFamily: '"Press Start 2P", monospace'}}>{proj.title.toUpperCase()}</div>
+                      <div className="font-pixel text-white text-lg font-bold tracking-wider">{proj.title.toUpperCase()}</div>
                       <div className="flex flex-row items-center gap-1">
-                        <span className="text-yellow-300 text-base">★</span>
-                        <span className="text-white text-sm font-bold" style={{fontFamily: 'monospace'}}>{(4.5 + idx * 0.1).toFixed(1)}</span>
+                        <span className="font-pixel text-yellow-300 text-base">★</span>
+                        <span className="font-pixel text-white text-sm font-bold">{(4.5 + idx * 0.1).toFixed(1)}</span>
                       </div>
                     </div>
                     {/* Description */}
                     <div className="w-full px-4 mb-8">
-                      <p className="text-white text-xs" style={{fontFamily: 'monospace'}}>{proj.desc}</p>
+                      <p className="font-pixel text-white text-xs">{proj.desc}</p>
                     </div>
                     {/* Play now / action button */}
                     <div className="w-full flex flex-row items-center justify-between px-4 mb-6">
                       <div className="flex flex-row items-center gap-1">
-                        <span className="text-yellow-300 text-lg">◎</span>
-                        <span className="text-white text-sm font-bold" style={{fontFamily: 'monospace'}}>{1200 - idx * 100}</span>
+                        <span className="font-pixel text-yellow-300 text-lg">◎</span>
+                        <span className="font-pixel text-white text-sm font-bold">{1200 - idx * 100}</span>
                       </div>
                       <button
-                        className="bg-purple-400 text-white text-xs font-bold px-4 py-2 rounded-md hover:bg-purple-300 transition-colors duration-200"
+                        className="font-pixel bg-purple-400 text-white text-xs font-bold px-4 py-2 rounded-md hover:bg-purple-300 transition-colors duration-200"
                         onClick={() => setSelectedImage(proj.img)}
-                        style={{fontFamily: 'monospace'}}
                       >
                         VIEW
                       </button>
@@ -196,32 +189,30 @@ const Gallery = () => {
           {/* Certificates Section */}
           <ScrollElement name="certificates">
             <div className="w-full flex flex-row items-center justify-between mb-8 px-2">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-widest" style={{fontFamily: '"Press Start 2P", monospace'}}>CERTIFICATES</h2>
+              <h2 className="font-pixel text-3xl sm:text-4xl font-bold text-white tracking-widest">CERTIFICATES</h2>
               <button
-                className="text-green-200 text-base sm:text-lg font-bold hover:text-yellow-300 transition-colors duration-200 tracking-wider"
+                className="font-pixel text-green-200 text-base sm:text-lg font-bold hover:text-yellow-300 transition-colors duration-200 tracking-wider"
                 onClick={() => handleExpand('certificates')}
-                style={{fontFamily: 'monospace'}}
               >
                 {expanded.certificates ? 'SEE LESS <' : 'SEE MORE >'}
               </button>
             </div>
-            <div className="w-full flex flex-col items-center justify-center min-h-[200px] text-yellow-300 text-lg font-bold" style={{fontFamily: 'monospace'}}>
+            <div className="w-full flex flex-col items-center justify-center min-h-[200px] text-yellow-300 text-lg font-bold font-pixel">
               No certificates to show yet.
             </div>
           </ScrollElement>
           {/* Others Section */}
           <ScrollElement name="others">
             <div className="w-full flex flex-row items-center justify-between mb-8 px-2">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-widest" style={{fontFamily: '"Press Start 2P", monospace'}}>OTHERS</h2>
+              <h2 className="font-pixel text-3xl sm:text-4xl font-bold text-white tracking-widest">OTHERS</h2>
               <button
-                className="text-green-200 text-base sm:text-lg font-bold hover:text-yellow-300 transition-colors duration-200 tracking-wider"
+                className="font-pixel text-green-200 text-base sm:text-lg font-bold hover:text-yellow-300 transition-colors duration-200 tracking-wider"
                 onClick={() => handleExpand('others')}
-                style={{fontFamily: 'monospace'}}
               >
                 {expanded.others ? 'SEE LESS <' : 'SEE MORE >'}
               </button>
             </div>
-            <div className="w-full flex flex-col items-center justify-center min-h-[200px] text-yellow-300 text-lg font-bold" style={{fontFamily: 'monospace'}}>
+            <div className="w-full flex flex-col items-center justify-center min-h-[200px] text-yellow-300 text-lg font-bold font-pixel">
               No items in this category yet.
             </div>
           </ScrollElement>
@@ -237,20 +228,20 @@ const Gallery = () => {
               onClick={e => e.stopPropagation()}
             >
               <button
-                className="absolute top-2 right-4 text-white text-3xl font-bold hover:text-yellow-300"
+                className="font-pixel absolute top-2 right-4 text-white text-3xl font-bold hover:text-yellow-300"
                 onClick={closeModal}
                 aria-label="Close modal"
               >
                 ×
               </button>
-              <h3 className="text-yellow-300 text-xl font-bold mb-4" style={{fontFamily: '"Press Start 2P", monospace'}}>All Projects</h3>
+              <h3 className="font-pixel text-yellow-300 text-xl font-bold mb-4">All Projects</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {placeholderImages.map((img, idx) => (
                   <img
                     key={idx}
                     src={img}
                     alt={`Project ${idx+1}`}
-                    className="rounded-lg cursor-pointer transition-transform duration-200 hover:scale-105 shadow-md border-2 border-yellow-300"
+                    className="rounded-lg cursor-pointer transition-transform duration-200 hover:scale-105 shadow-md border-2 border-yellow-300 font-pixel"
                     style={{ width: '150px', height: '100px', objectFit: 'cover' }}
                     onClick={() => setSelectedImage(img)}
                   />
@@ -270,7 +261,7 @@ const Gallery = () => {
               onClick={e => e.stopPropagation()}
             >
               <button
-                className="self-end mb-2 text-white text-2xl font-bold hover:text-yellow-300"
+                className="font-pixel self-end mb-2 text-white text-2xl font-bold hover:text-yellow-300"
                 onClick={closeModal}
                 aria-label="Close modal"
               >
