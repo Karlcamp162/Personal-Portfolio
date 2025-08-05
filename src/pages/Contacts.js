@@ -54,6 +54,7 @@ const Contacts = () => (
               <label className="block text-xs text-white mb-2 font-bold font-pixel">SUBJECT *</label>
               <select name="subject" className="!font-sans w-full px-3 py-2 rounded bg-purple-900 text-yellow-300 border-2 border-yellow-300 focus:outline-none">
                 <option value="">Select a topic...</option>
+                <option value="Job Opportunity">Job Opportunity</option>
                 <option value="collab">Collaboration</option>
                 <option value="question">Question</option>
                 <option value="feedback">Feedback</option>
@@ -94,14 +95,14 @@ const Contacts = () => (
             <div className="border-2 border-purple-500 rounded-xl p-6 bg-[#2d0a52] font-pixel">
               <div className="flex items-center mb-4">
                 <span className="text-purple-300 text-2xl mr-2">&#x1F517;</span>
-                <span className="text-white text-xl font-bold tracking-widest">FOLLOW US</span>
+                <span className="text-white text-xl font-bold tracking-widest">FOLLOW ME</span>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <a href="https://thesmartbridge.enterprise.slack.com/team/U0938U429DW" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white px-3 py-2 rounded transition"><FaSlack /> Slack</a>
-                <a href="https://github.com/Karlcamp162" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white px-3 py-2 rounded transition"><FaGithub /> GitHub</a>
-                <a href="https://www.linkedin.com/in/karl-louise-campos-492436192" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white px-3 py-2 rounded transition"><FaLinkedin /> LinkedIn</a>
-                <a href="https://wa.me/639765555519" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white px-3 py-2 rounded transition"><FaWhatsapp /> WhatsApp</a>
-                <a href="mailto:ckarlcamp@gmail.com" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white px-3 py-2 rounded transition col-span-2"><FaEnvelope /> Email</a>
+                <a href="https://thesmartbridge.enterprise.slack.com/team/U0938U429DW" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white hover:text-yellow-400 px-3 py-2 rounded transition"><FaSlack /> Slack</a>
+                <a href="https://github.com/Karlcamp162" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white hover:text-yellow-400 px-3 py-2 rounded transition"><FaGithub /> GitHub</a>
+                <a href="https://www.linkedin.com/in/karl-louise-campos-492436192" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white hover:text-yellow-400 px-3 py-2 rounded transition"><FaLinkedin /> LinkedIn</a>
+                <a href="https://wa.me/639765555519" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white hover:text-yellow-400 px-3 py-2 rounded transition"><FaWhatsapp /> WhatsApp</a>
+                <a href="mailto:ckarlcamp@gmail.com" className="flex items-center gap-2 bg-purple-800 hover:bg-purple-700 text-white hover:text-yellow-400 px-3 py-2 rounded transition col-span-2"><FaEnvelope /> Email</a>
               </div>
             </div>
           </div>

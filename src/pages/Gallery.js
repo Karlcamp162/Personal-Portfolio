@@ -12,6 +12,19 @@ const placeholderImages = [
   'https://via.placeholder.com/300x200?text=Image+6',
 ]
 
+const certificateImages = [
+  { src: '/gallery/certificates/vice.png', title: 'Vice Mayor Award', desc: 'Awarded by the Vice Mayor for outstanding student leadership.', category: 'Certificate of Appreciation' },
+  { src: '/gallery/certificates/EthicalHacking.png', title: 'Hacking Workshop', desc: 'Completion of the Ethical Hacking and Cybersecurity workshop.', category: 'Certificate of Participation' },
+  { src: '/gallery/certificates/scratch.png', title: 'Scratch Programming', desc: 'Certificate for being the champion of the Scratch programming competition.', category: 'Certificate of Recognition' },
+  { src: '/gallery/certificates/technofair.png', title: 'Technofair', desc: 'Awarded for organizing contestants in the Technofair event.', category: 'Certificate of Service' },
+  { src: '/gallery/certificates/technofair2.png', title: 'Technofair 2.0', desc: 'Certificate for assisting in organizing the Technofair event.', category: 'Certificate of Service' },
+  { src: '/gallery/certificates/chess.png', title: 'Chess Tournament', desc: 'Recognized for participation in the Intramurals chess competition.', category: 'Certificate of Participation' },
+  { src: '/gallery/certificates/Acquiantance.png', title: 'Acquaintance Party', desc: 'Participation in the annual university acquaintance party.', category: 'Certificate of Participation' },
+  { src: '/gallery/certificates/enrollment.png', title: 'Early Enrollment', desc: 'Recognition for early enrollment in the academic year.', category: 'Certificate of Recognition' },
+  { src: '/gallery/certificates/TeachersDay.png', title: "Teacher's Day", desc: 'Given for helping organize Teacher’s Day appriciation event.', category: 'Certificate of Appreciation' },
+  { src: '/gallery/certificates/funRun.png', title: 'Fun Run Participation', desc: 'Awarded as one of the organizers of the University fun run event.', category: 'Certificate of Service' },
+];
+
 const projectPreview = [
   {
     img: placeholderImages[2],
@@ -147,11 +160,11 @@ const Gallery = () => {
                       <div className="font-pixel absolute top-4 right-4 bg-blue-200 text-xs font-bold text-black px-3 py-1 rounded-md shadow-md tracking-widest">NEW</div>
                     )}
                     {/* Project image */}
-                    <div className="w-full flex justify-center mt-6 mb-4">
+                    <div className="w-full flex justify-center mt-6 mb-4 px-6">
                       <img
                         src={proj.img}
                         alt={proj.title}
-                        className="w-24 h-20 object-cover rounded-lg bg-[#1a0033] border-2 border-yellow-300 shadow-lg"
+                        className="w-full h-32 object-cover rounded-lg bg-[#1a0033] border-2 border-yellow-300 shadow-lg"
                         style={{ imageRendering: 'pixelated' }}
                         onClick={() => setSelectedImage(proj.img)}
                       />
@@ -197,9 +210,60 @@ const Gallery = () => {
                 {expanded.certificates ? 'SEE LESS <' : 'SEE MORE >'}
               </button>
             </div>
-            <div className="w-full flex flex-col items-center justify-center min-h-[200px] text-yellow-300 text-lg font-bold font-pixel">
-              No certificates to show yet.
-            </div>
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, type: 'spring' }}
+              className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-items-center"
+            >
+              <AnimatePresence initial={false}>
+                {(expanded.certificates ? certificateImages : certificateImages.slice(0, 4)).map((cert, idx) => (
+                  <motion.div
+                    key={cert.src}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3, type: 'spring' }}
+                    whileHover={{ scale: 1.07, zIndex: 2, boxShadow: '0 8px 32px 0 rgba(255,255,0,0.15)' }}
+                    className="bg-[#2d0a52] rounded-2xl shadow-2xl w-full max-w-xs flex flex-col items-center border-4 border-purple-700 relative cursor-pointer"
+                    style={{minHeight: '260px'}}
+                  >
+                    {/* Certificate image */}
+                    <div className="w-full flex justify-center mt-6 mb-2 px-6">
+                      <img
+                        src={cert.src}
+                        alt={cert.title}
+                        className="w-full h-32 object-cover rounded-lg bg-[#1a0033] border-2 border-yellow-300 shadow-lg"
+                        style={{ imageRendering: 'pixelated' }}
+                        onClick={() => setSelectedImage(cert.src)}
+                      />
+                    </div>
+                    {/* Subtitle (title) */}
+                    <div className="w-full px-4 flex flex-row items-center justify-between mb-2">
+                      <div className="font-pixel text-white text-lg font-bold tracking-wider">{cert.title}</div>
+                    </div>
+                    {/* View button */}
+                    <div className="w-full flex flex-row items-center justify-between px-4 mb-2">
+                      <span className="font-pixel text-purple-200 text-xs font-semibold bg-purple-900 bg-opacity-60 rounded px-2 py-1">{cert.category}</span>
+                      <button
+                        className="font-pixel bg-purple-400 text-white text-xs font-bold px-4 py-2 rounded-md hover:bg-purple-300 transition-colors duration-200"
+                        onClick={() => setSelectedImage(cert.src)}
+                      >
+                        VIEW
+                      </button>
+                    </div>
+                    {/* Description */}
+                    <div className="w-full px-4 mb-2">
+                      <div className="bg-purple-800 bg-opacity-80 rounded-lg px-3 py-2 mt-1 shadow-inner">
+                        <p className="font-pixel text-yellow-200 text-xs text-left">{cert.desc}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           </ScrollElement>
           {/* Others Section */}
           <ScrollElement name="others">
