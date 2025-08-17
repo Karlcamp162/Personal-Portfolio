@@ -25,27 +25,69 @@ const certificateImages = [
   { src: '/gallery/certificates/funRun.png', title: 'Fun Run Participation', desc: 'Awarded as one of the organizers of the University fun run event.', category: 'Certificate of Service' },
 ];
 
+// Portfolio project images (public paths)
+const portfolioImages = [
+  '/gallery/projects/portfolio/img1.png',
+  '/gallery/projects/portfolio/img2.png',
+  '/gallery/projects/portfolio/img3.png',
+  '/gallery/projects/portfolio/img4.png',
+  '/gallery/projects/portfolio/img5.png',
+]
+
+const cicImages = [
+  '/gallery/projects/cic/cic1.png',
+  '/gallery/projects/cic/cic2.png',
+  '/gallery/projects/cic/cic3.png',
+  '/gallery/projects/cic/cic4.png',
+  '/gallery/projects/cic/cic5.png',
+  '/gallery/projects/cic/cic6.png',
+]
+
+const todoAppImages = [
+  '/gallery/projects/todo_app/todo_app1.png',
+]
+
+const treatmeImages = [
+  '/gallery/projects/Treatme/treatme1.png',
+  '/gallery/projects/Treatme/treatme2.png',
+  '/gallery/projects/Treatme/treatme3.png',
+  '/gallery/projects/Treatme/treatme4.png',
+  '/gallery/projects/Treatme/treatme5.png',
+  '/gallery/projects/Treatme/treatme6.png',
+]
+
+const wordpressResearchImages = [
+  '/gallery/projects/wordpressResearch/research1.png',
+  '/gallery/projects/wordpressResearch/research2.png',
+  '/gallery/projects/wordpressResearch/research3.png',
+  '/gallery/projects/wordpressResearch/research4.png',
+  '/gallery/projects/wordpressResearch/research5.png',
+]
+
 const projectPreview = [
   {
-    img: placeholderImages[2],
+    img: portfolioImages[0],
     title: 'Portfolio Site',
-    desc: 'My personal portfolio in pixel art style.'
+    desc: 'My personal portfolio in pixel art style, showcasing my skills.',
+    images: portfolioImages
   },
   {
-    img: placeholderImages[1],
-    title: 'Weather App',
-    desc: 'Weather dashboardd.'
-  },
-
-  {
-    img: placeholderImages[0],
-    title: 'Pixel Platformer',
-    desc: 'A retro platformer.'
+    img: cicImages[0],
+    title: 'Campos Internet Cafe',
+    desc: 'A digitalized business platform helping people browse and discover available items and services.',
+    images: cicImages
   },
   {
-    img: placeholderImages[3],
-    title: 'Memory Puzzle',
-    desc: 'PUzzzleesss.'
+    img: todoAppImages[0],
+    title: 'Todo App',
+    desc: 'A simple and gamified todo list application.',
+    images: todoAppImages
+  },
+  {
+    img: treatmeImages[0],
+    title: 'Treat Me',
+    desc: 'A mobile application for booking and managing salon appointments.',
+    images: treatmeImages
   }
 ]
 
@@ -61,6 +103,11 @@ const Gallery = () => {
   const [expanded, setExpanded] = useState({ projects: false, certificates: false, others: false })
   const [activeCategory, setActiveCategory] = useState('projects')
 
+  // Slider state for specific project galleries
+  const [sliderOpen, setSliderOpen] = useState(false)
+  const [sliderImages, setSliderImages] = useState([])
+  const [sliderIndex, setSliderIndex] = useState(0)
+
   const handleExpand = (cat) => {
     setExpanded(prev => ({ ...prev, [cat]: !prev[cat] }))
   }
@@ -68,6 +115,34 @@ const Gallery = () => {
   const closeModal = () => {
     setModalOpen(false)
     setSelectedImage(null)
+  }
+
+  const openSlider = (images, startIndex = 0) => {
+    setSliderImages(images)
+    setSliderIndex(startIndex)
+    setSliderOpen(true)
+  }
+
+  const closeSlider = () => {
+    setSliderOpen(false)
+    setSliderImages([])
+    setSliderIndex(0)
+  }
+
+  const nextSlide = () => {
+    setSliderIndex((prev) => (prev + 1) % sliderImages.length)
+  }
+
+  const prevSlide = () => {
+    setSliderIndex((prev) => (prev - 1 + sliderImages.length) % sliderImages.length)
+  }
+
+  const handleProjectClick = (proj) => {
+    if (proj.images && proj.images.length > 1) {
+      openSlider(proj.images, 0)
+    } else if (proj.img) {
+      setSelectedImage(proj.img)
+    }
   }
 
   return (
@@ -94,7 +169,7 @@ const Gallery = () => {
       </div>
       <div
         id="wall"
-        className="w-full min-h-[400px] flex flex-col items-center justify-center rounded-lg shadow-lg p-8"
+        className="w-full min-h[400px] flex flex-col items-center justify-center rounded-lg shadow-lg p-8"
         style={{
           backgroundImage: "url('/wall.png')",
           backgroundRepeat: "repeat",
@@ -141,8 +216,7 @@ const Gallery = () => {
             >
               <AnimatePresence initial={false}>
                 {(expanded.projects ? projectPreview.concat([
-                  { img: placeholderImages[4], title: 'Pixel Chat', desc: 'A chat app with pixel avatars.' },
-                  { img: placeholderImages[5], title: 'Todo Quest', desc: 'Gamified todo list in pixel style.' }
+                  { img: wordpressResearchImages[0], title: 'Internet Divide Research Website', desc: 'A WordPress-based research website exploring the digital divide and its impact on society.', images: wordpressResearchImages }
                 ]) : projectPreview).map((proj, idx) => (
                   <motion.div
                     key={proj.title}
@@ -166,7 +240,7 @@ const Gallery = () => {
                         alt={proj.title}
                         className="w-full h-32 object-cover rounded-lg bg-[#1a0033] border-2 border-yellow-300 shadow-lg"
                         style={{ imageRendering: 'pixelated' }}
-                        onClick={() => setSelectedImage(proj.img)}
+                        onClick={() => handleProjectClick(proj)}
                       />
                     </div>
                     {/* Title and rating */}
@@ -189,7 +263,7 @@ const Gallery = () => {
                       </div>
                       <button
                         className="font-pixel bg-purple-400 text-white text-xs font-bold px-4 py-2 rounded-md hover:bg-purple-300 transition-colors duration-200"
-                        onClick={() => setSelectedImage(proj.img)}
+                        onClick={() => handleProjectClick(proj)}
                       >
                         VIEW
                       </button>
@@ -336,6 +410,60 @@ const Gallery = () => {
                 alt="Full size preview"
                 className="max-w-[90vw] max-h-[80vh] rounded-lg shadow-2xl border-4 border-yellow-300"
               />
+            </div>
+          </div>
+        )}
+        {/* Slider modal for Portfolio */}
+        {sliderOpen && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+            onClick={closeSlider}
+          >
+            <div
+              className="relative bg-[#1a0033]/40 p-2 rounded-xl border-4 border-yellow-300 flex items-center justify-center max-w-[92vw] max-h-[86vh] w-full"
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Close */}
+              <button
+                className="font-pixel absolute top-2 right-3 text-white text-3xl font-bold hover:text-yellow-300"
+                onClick={closeSlider}
+                aria-label="Close slider"
+              >
+                ×
+              </button>
+              {/* Prev */}
+              <button
+                className="font-pixel absolute left-2 md:left-4 text-yellow-300 text-3xl md:text-5xl font-bold hover:text-white"
+                onClick={prevSlide}
+                aria-label="Previous image"
+              >
+                ‹
+              </button>
+              {/* Next */}
+              <button
+                className="font-pixel absolute right-2 md:right-4 text-yellow-300 text-3xl md:text-5xl font-bold hover:text-white"
+                onClick={nextSlide}
+                aria-label="Next image"
+              >
+                ›
+              </button>
+              {/* Image */}
+              <img
+                src={sliderImages[sliderIndex]}
+                alt={`Slide ${sliderIndex+1}`}
+                className="rounded-lg shadow-2xl border-4 border-purple-600 max-w-[88vw] max-h-[74vh] object-contain"
+              />
+              {/* Dots */}
+              <div className="absolute bottom-2 left-0 right-0 flex items-center justify-center gap-2">
+                {sliderImages.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`w-2.5 h-2.5 rounded-full ${i===sliderIndex ? 'bg-yellow-300' : 'bg-purple-600'}`}
+                    onClick={() => setSliderIndex(i)}
+                    aria-label={`Go to slide ${i+1}`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         )}
