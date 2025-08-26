@@ -14,7 +14,7 @@ const placeholderImages = [
 
 const certificateImages = [
   { src: '/gallery/certificates/vice.png', title: 'Vice Mayor Award', desc: 'Awarded to Vice Mayor for outstanding student leadership.', category: 'Certificate of Appreciation' },
-  { src: '/gallery/certificates/Salesforce.png', title: 'Salesforce Internship', desc: 'Awarded by Smartbridge team from India for completing Salesforce Virtual Internship Program.', category: 'Certificate of Completion' },
+  { src: '/gallery/certificates/salesforce.png', title: 'Salesforce Internship', desc: 'Awarded by Smartbridge team from India for completing Salesforce Virtual Internship Program.', category: 'Certificate of Completion' },
   { src: '/gallery/certificates/EthicalHacking.png', title: 'Hacking Workshop', desc: 'Completion of the Ethical Hacking and Cybersecurity workshop.', category: 'Certificate of Participation' },
   { src: '/gallery/certificates/scratch.png', title: 'Scratch Programming', desc: 'Certificate for being the champion of the Scratch programming competition.', category: 'Certificate of Recognition' },
   { src: '/gallery/certificates/technofair.png', title: 'Technofair', desc: 'Awarded for organizing contestants in the Technofair event.', category: 'Certificate of Service' }, 
