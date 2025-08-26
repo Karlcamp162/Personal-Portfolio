@@ -92,7 +92,7 @@ const projectPreview = [
   {
     img: treatmeImages[0],
     title: 'Treat Me',
-    desc: 'A mobile application for booking and managing salon appointments.',
+    desc: 'A web application for a food business that allows customers to order food online.',
     images: treatmeImages
   }
 ]
