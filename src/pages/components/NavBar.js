@@ -14,7 +14,10 @@ function NavBar() {
 
   return (
     <header>
-        <Link to={"/"}><h1>Portfolio</h1></Link>
+        <Link to={"/"} className="brand">
+          <img src="/face-logo.png" alt="Logo" className="brand-logo" />
+          <h1>Karlcamp</h1>
+        </Link>
         <div className="DropDown">
         <button className="DropDownBtn" onClick= {() => setDrop(!isdrop)} ><MdOutlineGamepad className="btnIcon" alt="menu"/></button>
 
