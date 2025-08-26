@@ -13,10 +13,11 @@ const placeholderImages = [
 ]
 
 const certificateImages = [
-  { src: '/gallery/certificates/vice.png', title: 'Vice Mayor Award', desc: 'Awarded by the Vice Mayor for outstanding student leadership.', category: 'Certificate of Appreciation' },
+  { src: '/gallery/certificates/vice.png', title: 'Vice Mayor Award', desc: 'Awarded to Vice Mayor for outstanding student leadership.', category: 'Certificate of Appreciation' },
+  { src: '/gallery/certificates/Salesforce.png', title: 'Salesforce Internship', desc: 'Awarded by Smartbridge team from India for completing Salesforce Virtual Internship Program.', category: 'Certificate of Completion' },
   { src: '/gallery/certificates/EthicalHacking.png', title: 'Hacking Workshop', desc: 'Completion of the Ethical Hacking and Cybersecurity workshop.', category: 'Certificate of Participation' },
   { src: '/gallery/certificates/scratch.png', title: 'Scratch Programming', desc: 'Certificate for being the champion of the Scratch programming competition.', category: 'Certificate of Recognition' },
-  { src: '/gallery/certificates/technofair.png', title: 'Technofair', desc: 'Awarded for organizing contestants in the Technofair event.', category: 'Certificate of Service' },
+  { src: '/gallery/certificates/technofair.png', title: 'Technofair', desc: 'Awarded for organizing contestants in the Technofair event.', category: 'Certificate of Service' }, 
   { src: '/gallery/certificates/technofair2.png', title: 'Technofair 2.0', desc: 'Certificate for assisting in organizing the Technofair event.', category: 'Certificate of Service' },
   { src: '/gallery/certificates/chess.png', title: 'Chess Tournament', desc: 'Recognized for participation in the Intramurals chess competition.', category: 'Certificate of Participation' },
   { src: '/gallery/certificates/Acquiantance.png', title: 'Acquaintance Party', desc: 'Participation in the annual university acquaintance party.', category: 'Certificate of Participation' },
@@ -62,6 +63,11 @@ const wordpressResearchImages = [
   '/gallery/projects/wordpressResearch/research3.png',
   '/gallery/projects/wordpressResearch/research4.png',
   '/gallery/projects/wordpressResearch/research5.png',
+]
+
+const otherImages = [
+  { src: '/gallery/others/teamD.jpg', title: 'Team Destineer', desc: 'Team Destineer pitching an innovative project on technofair A.Y. 2024-2025.', category: 'Team Activity' },
+  { src: '/gallery/others/pitching.jpg', title: 'Pitching Participation Award', desc: 'Awarded for participating in the pitching event.', category: 'Presentation' },
 ]
 
 const projectPreview = [
@@ -350,9 +356,60 @@ const Gallery = () => {
                 {expanded.others ? 'SEE LESS <' : 'SEE MORE >'}
               </button>
             </div>
-            <div className="w-full flex flex-col items-center justify-center min-h-[200px] text-yellow-300 text-lg font-bold font-pixel">
-              No items in this category yet.
-            </div>
+            <motion.div
+              layout
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, type: 'spring' }}
+              className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 justify-items-center"
+            >
+              <AnimatePresence initial={false}>
+                {(expanded.others ? otherImages : otherImages.slice(0, 4)).map((item, idx) => (
+                  <motion.div
+                    key={item.src}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3, type: 'spring' }}
+                    whileHover={{ scale: 1.07, zIndex: 2, boxShadow: '0 8px 32px 0 rgba(255,255,0,0.15)' }}
+                    className="bg-[#2d0a52] rounded-2xl shadow-2xl w-full max-w-xs flex flex-col items-center border-4 border-purple-700 relative cursor-pointer"
+                    style={{minHeight: '260px'}}
+                  >
+                    {/* Item image */}
+                    <div className="w-full flex justify-center mt-6 mb-2 px-6">
+                      <img
+                        src={item.src}
+                        alt={item.title}
+                        className="w-full h-32 object-cover rounded-lg bg-[#1a0033] border-2 border-yellow-300 shadow-lg"
+                        style={{ imageRendering: 'pixelated' }}
+                        onClick={() => setSelectedImage(item.src)}
+                      />
+                    </div>
+                    {/* Subtitle (title) */}
+                    <div className="w-full px-4 flex flex-row items-center justify-between mb-2">
+                      <div className="font-pixel text-white text-lg font-bold tracking-wider">{item.title}</div>
+                    </div>
+                    {/* View button */}
+                    <div className="w-full flex flex-row items-center justify-between px-4 mb-2">
+                      <span className="font-pixel text-purple-200 text-xs font-semibold bg-purple-900 bg-opacity-60 rounded px-2 py-1">{item.category}</span>
+                      <button
+                        className="font-pixel bg-purple-400 text-white text-xs font-bold px-4 py-2 rounded-md hover:bg-purple-300 transition-colors duration-200"
+                        onClick={() => setSelectedImage(item.src)}
+                      >
+                        VIEW
+                      </button>
+                    </div>
+                    {/* Description */}
+                    <div className="w-full px-4 mb-2">
+                      <div className="bg-purple-800 bg-opacity-80 rounded-lg px-3 py-2 mt-1 shadow-inner">
+                        <p className="font-pixel text-yellow-200 text-xs text-left">{item.desc}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </motion.div>
           </ScrollElement>
         </div>
         {/* Modal for all project images */}
@@ -388,7 +445,7 @@ const Gallery = () => {
             </div>
           </div>
         )}
-        {/* Full-size image modal */}
+        {/* image modal */}
         {selectedImage && (
           <div
             className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"

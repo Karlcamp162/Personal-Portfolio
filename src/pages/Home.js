@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import './Home.css';
 
 const cloudWidth = 300; // Adjust to match your cloud image width in px
 
@@ -29,6 +30,51 @@ const CloudMarquee = ({ top, height, duration, direction = 'right' }) => {
 };
 
 const Home = () => {
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [count, setCount] = useState(3);
+  const [showPlay, setShowPlay] = useState(false);
+  const [showContent, setShowContent] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    // Check if animation has been shown in this session
+    const hasShownAnimation = sessionStorage.getItem('homeAnimationShown');
+    
+    if (!hasShownAnimation) {
+      setShowAnimation(true);
+      // Mark as shown for this session only
+      sessionStorage.setItem('homeAnimationShown', 'true');
+    } else {
+      setShowContent(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showAnimation) return;
+
+    const countdown = setInterval(() => {
+      setCount(prev => {
+        if (prev > 1) {
+          return prev - 1;
+        } else {
+          clearInterval(countdown);
+          setShowPlay(true);
+          return 0;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(countdown);
+  }, [showAnimation]);
+
+  const handlePlay = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      setShowAnimation(false);
+      setShowContent(true);
+    }, 500);
+  };
+
   return (
     <>
       <NavBar />
@@ -37,8 +83,53 @@ const Home = () => {
         className="fixed bottom-0 w-full object-cover z-[-1] h-[60px] sm:h-[80px] lg:h-[100px]"
         alt="road_img"
       />  
+
+      {/* Landing Animation Overlay */}
+      <AnimatePresence>
+        {showAnimation && (
+          <motion.div
+            className={`fixed inset-0 bg-gradient-to-br from-purple-900 via-blue-900 to-purple-800 z-50 flex items-center justify-center ${fadeOut ? 'animate-fade-out' : ''}`}
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="text-center">
+              {!showPlay ? (
+                <motion.div
+                  key={count}
+                  className="text-9xl sm:text-[12rem] lg:text-[15rem] font-bold text-yellow-300 font-pixel"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, type: 'spring' }}
+                >
+                  {count}
+                </motion.div>
+              ) : (
+                <motion.button
+                  className="bg-yellow-300 text-purple-900 text-4xl sm:text-5xl lg:text-6xl font-bold font-pixel px-12 py-6 rounded-2xl border-4 border-purple-700 hover:bg-yellow-200 hover:scale-110 transition-all duration-300 shadow-2xl"
+                  onClick={handlePlay}
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  START
+                </motion.button>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
-      <div className="flex flex-col items-center justify-center animate-fade-in px-4 sm:px-6 lg:px-8 mt-4 sm:mt-8 lg:mt-6 mb-20">
+      <AnimatePresence>
+        {showContent && (
+          <motion.div 
+            className="flex flex-col items-center justify-center animate-fade-in px-4 sm:px-6 lg:px-8 mt-4 sm:mt-8 lg:mt-6 mb-20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
         <div className="text-center">
           <p className="text-5xl sm:text-7xl lg:text-9xl font-bold text-yellow-300 leading-tight">
             Welcome to My
@@ -68,8 +159,10 @@ const Home = () => {
           >
             See Profile
           </Link>
-        </div>
-      </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* eslint-disable-next-line jsx-a11y/no-distracting-elements */}
       <marquee behavior="alternate" direction="right" scrollAmount="3" className="fixed bottom-[35px] sm:bottom-[45px] lg:bottom-[60px] z-[-1]">
