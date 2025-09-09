@@ -65,6 +65,14 @@ const wordpressResearchImages = [
   '/gallery/projects/wordpressResearch/research5.png',
 ]
 
+const reactWallImages = [
+  '/gallery/projects/react_wall/wall_screenshot.png',
+]
+
+const tictactoeImages = [
+  '/gallery/projects/tictactoe/react_ttt.png',
+]
+
 const otherImages = [
   { src: '/gallery/others/teamD.jpg', title: 'Team Destineer', desc: 'Team Destineer pitching an innovative project on technofair A.Y. 2024-2025.', category: 'Team Activity' },
   { src: '/gallery/others/pitching.jpg', title: 'Pitching Participation Award', desc: 'Awarded for participating in the pitching event.', category: 'Presentation' },
@@ -222,7 +230,9 @@ const Gallery = () => {
             >
               <AnimatePresence initial={false}>
                 {(expanded.projects ? projectPreview.concat([
-                  { img: wordpressResearchImages[0], title: 'Internet Divide Research Website', desc: 'A WordPress-based research website exploring the digital divide and its impact on society.', images: wordpressResearchImages }
+                  { img: wordpressResearchImages[0], title: 'Internet Divide Research Website', desc: 'A WordPress-based research website exploring the digital divide and its impact on society.', images: wordpressResearchImages },
+                  { img: reactWallImages[0], title: 'React Wall', desc: 'A React-based wall application with interactive features and modern UI design.', images: reactWallImages },
+                  { img: tictactoeImages[0], title: 'React Tic Tac Toe', desc: 'A classic tic-tac-toe game built with React, featuring interactive gameplay and responsive design.', images: tictactoeImages }
                 ]) : projectPreview).map((proj, idx) => (
                   <motion.div
                     key={proj.title}
