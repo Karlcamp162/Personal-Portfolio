@@ -31,7 +31,7 @@ function Profile() {
             <div className='class'>
               <div className='class_row1'>
                 <h3>Lvl:</h3>
-                <p>4th yr. Undergraduate Student</p>
+                <p>Fresh Graduate</p>
               </div>
               <div className='class_row2'>
                 <h3>Age:</h3>
@@ -92,7 +92,7 @@ function Profile() {
               <h2 className='title2'>Biography</h2>
               <div className='biography'>
                 <p>
-                  Fourth-year college student Karl Louise is a programming enthusiast already building a strong portfolio made with ReactJS styled with a combination of vanilla CSS and tailwindcss. Proactive and driven, he is eager to apply their growing expertise to real-world challenges and contribute fresh energy to a forward-thinking team. Ready to learn and deliver results.
+                  Fresh graduate Karl Louise is a programming enthusiast with a strong portfolio built with ReactJS, styled using a combination of vanilla CSS and Tailwind CSS. Proactive and driven, he is eager to apply his growing expertise to real-world challenges and contribute fresh energy to a forward-thinking team. Ready to learn and deliver results.
                 </p>
               </div>
             </div>
