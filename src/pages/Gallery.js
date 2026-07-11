@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import NavBar from './components/NavBar'
 import { Link as ScrollLink, Element as ScrollElement } from 'react-scroll'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -130,6 +130,7 @@ const Gallery = () => {
   const [sliderOpen, setSliderOpen] = useState(false)
   const [sliderImages, setSliderImages] = useState([])
   const [sliderIndex, setSliderIndex] = useState(0)
+  const sliderImagesRef = useRef([])
 
   const handleExpand = (cat) => {
     setExpanded(prev => ({ ...prev, [cat]: !prev[cat] }))
@@ -141,6 +142,7 @@ const Gallery = () => {
   }
 
   const openSlider = (images, startIndex = 0) => {
+    sliderImagesRef.current = images
     setSliderImages(images)
     setSliderIndex(startIndex)
     setSliderOpen(true)
@@ -148,16 +150,23 @@ const Gallery = () => {
 
   const closeSlider = () => {
     setSliderOpen(false)
+    sliderImagesRef.current = []
     setSliderImages([])
     setSliderIndex(0)
   }
 
-  const nextSlide = () => {
-    setSliderIndex((prev) => (prev + 1) % sliderImages.length)
+  const nextSlide = (e) => {
+    e.stopPropagation()
+    const length = sliderImagesRef.current.length
+    if (length <= 1) return
+    setSliderIndex((prev) => (prev + 1) % length)
   }
 
-  const prevSlide = () => {
-    setSliderIndex((prev) => (prev - 1 + sliderImages.length) % sliderImages.length)
+  const prevSlide = (e) => {
+    e.stopPropagation()
+    const length = sliderImagesRef.current.length
+    if (length <= 1) return
+    setSliderIndex((prev) => (prev - 1 + length) % length)
   }
 
   const handleProjectClick = (proj) => {
@@ -442,119 +451,121 @@ const Gallery = () => {
             </motion.div>
           </ScrollElement>
         </div>
-        {/* Modal for all project images */}
-        {modalOpen && (
+      </div>
+      {/* Modal for all project images */}
+      {modalOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+          onClick={closeModal}
+        >
           <div
-            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-            onClick={closeModal}
+            className="bg-[#2d0a52] p-6 rounded-2xl flex flex-col items-center max-w-3xl w-full relative border-4 border-purple-700"
+            onClick={e => e.stopPropagation()}
           >
-            <div
-              className="bg-[#2d0a52] p-6 rounded-2xl flex flex-col items-center max-w-3xl w-full relative border-4 border-purple-700"
-              onClick={e => e.stopPropagation()}
+            <button
+              className="font-pixel absolute top-2 right-4 text-white text-3xl font-bold hover:text-yellow-300"
+              onClick={closeModal}
+              aria-label="Close modal"
             >
-              <button
-                className="font-pixel absolute top-2 right-4 text-white text-3xl font-bold hover:text-yellow-300"
-                onClick={closeModal}
-                aria-label="Close modal"
-              >
-                ×
-              </button>
-              <h3 className="font-pixel text-yellow-300 text-xl font-bold mb-4">All Projects</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {placeholderImages.map((img, idx) => (
-                  <img
-                    key={idx}
-                    src={img}
-                    alt={`Project ${idx+1}`}
-                    className="rounded-lg cursor-pointer transition-transform duration-200 hover:scale-105 shadow-md border-2 border-yellow-300 font-pixel"
-                    style={{ width: '150px', height: '100px', objectFit: 'cover' }}
-                    onClick={() => setSelectedImage(img)}
-                  />
-                ))}
-              </div>
+              ×
+            </button>
+            <h3 className="font-pixel text-yellow-300 text-xl font-bold mb-4">All Projects</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              {placeholderImages.map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`Project ${idx+1}`}
+                  className="rounded-lg cursor-pointer transition-transform duration-200 hover:scale-105 shadow-md border-2 border-yellow-300 font-pixel"
+                  style={{ width: '150px', height: '100px', objectFit: 'cover' }}
+                  onClick={() => setSelectedImage(img)}
+                />
+              ))}
             </div>
           </div>
-        )}
-        {/* image modal */}
-        {selectedImage && (
+        </div>
+      )}
+      {/* image modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onClick={closeModal}
+        >
           <div
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-            onClick={closeModal}
+            className="bg-transparent p-4 rounded-lg flex flex-col items-center"
+            onClick={e => e.stopPropagation()}
           >
-            <div
-              className="bg-transparent p-4 rounded-lg flex flex-col items-center"
-              onClick={e => e.stopPropagation()}
+            <button
+              className="font-pixel self-end mb-2 text-white text-2xl font-bold hover:text-yellow-300"
+              onClick={closeModal}
+              aria-label="Close modal"
             >
-              <button
-                className="font-pixel self-end mb-2 text-white text-2xl font-bold hover:text-yellow-300"
-                onClick={closeModal}
-                aria-label="Close modal"
-              >
-                ×
-              </button>
-              <img
-                src={selectedImage}
-                alt="Full size preview"
-                className="max-w-[90vw] max-h-[80vh] rounded-lg shadow-2xl border-4 border-yellow-300"
-              />
-            </div>
+              ×
+            </button>
+            <img
+              src={selectedImage}
+              alt="Full size preview"
+              className="max-w-[90vw] max-h-[80vh] rounded-lg shadow-2xl border-4 border-yellow-300"
+            />
           </div>
-        )}
-        {/* Slider modal for Portfolio */}
-        {sliderOpen && (
+        </div>
+      )}
+      {/* Slider modal */}
+      {sliderOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onClick={closeSlider}
+        >
           <div
-            className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-            onClick={closeSlider}
+            className="relative flex flex-row items-center justify-center gap-2 sm:gap-4 max-w-[96vw] max-h-[90vh] p-4"
+            onClick={e => e.stopPropagation()}
           >
-            <div
-              className="relative bg-[#1a0033]/40 p-2 rounded-xl border-4 border-yellow-300 flex items-center justify-center max-w-[92vw] max-h-[86vh] w-full"
-              onClick={e => e.stopPropagation()}
+            <button
+              type="button"
+              className="font-pixel shrink-0 text-yellow-300 text-3xl md:text-5xl font-bold hover:text-white px-2"
+              onClick={prevSlide}
+              aria-label="Previous image"
             >
-              {/* Close */}
+              ‹
+            </button>
+            <div className="relative flex flex-col items-center justify-center min-w-0">
               <button
-                className="font-pixel absolute top-2 right-3 text-white text-3xl font-bold hover:text-yellow-300"
-                onClick={closeSlider}
+                type="button"
+                className="font-pixel absolute -top-2 right-0 text-white text-3xl font-bold hover:text-yellow-300 z-10"
+                onClick={(e) => { e.stopPropagation(); closeSlider() }}
                 aria-label="Close slider"
               >
                 ×
               </button>
-              {/* Prev */}
-              <button
-                className="font-pixel absolute left-2 md:left-4 text-yellow-300 text-3xl md:text-5xl font-bold hover:text-white"
-                onClick={prevSlide}
-                aria-label="Previous image"
-              >
-                ‹
-              </button>
-              {/* Next */}
-              <button
-                className="font-pixel absolute right-2 md:right-4 text-yellow-300 text-3xl md:text-5xl font-bold hover:text-white"
-                onClick={nextSlide}
-                aria-label="Next image"
-              >
-                ›
-              </button>
-              {/* Image */}
               <img
+                key={sliderImages[sliderIndex]}
                 src={sliderImages[sliderIndex]}
-                alt={`Slide ${sliderIndex+1}`}
-                className="rounded-lg shadow-2xl border-4 border-purple-600 max-w-[88vw] max-h-[74vh] object-contain"
+                alt={`Slide ${sliderIndex + 1}`}
+                className="rounded-lg shadow-2xl border-4 border-purple-600 max-w-[80vw] max-h-[74vh] object-contain bg-[#1a0033]/40"
               />
-              {/* Dots */}
-              <div className="absolute bottom-2 left-0 right-0 flex items-center justify-center gap-2">
+              <div className="mt-3 flex items-center justify-center gap-2">
                 {sliderImages.map((_, i) => (
                   <button
                     key={i}
-                    className={`w-2.5 h-2.5 rounded-full ${i===sliderIndex ? 'bg-yellow-300' : 'bg-purple-600'}`}
-                    onClick={() => setSliderIndex(i)}
-                    aria-label={`Go to slide ${i+1}`}
+                    type="button"
+                    className={`w-2.5 h-2.5 rounded-full ${i === sliderIndex ? 'bg-yellow-300' : 'bg-purple-600'}`}
+                    onClick={(e) => { e.stopPropagation(); setSliderIndex(i) }}
+                    aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
               </div>
             </div>
+            <button
+              type="button"
+              className="font-pixel shrink-0 text-yellow-300 text-3xl md:text-5xl font-bold hover:text-white px-2"
+              onClick={nextSlide}
+              aria-label="Next image"
+            >
+              ›
+            </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
