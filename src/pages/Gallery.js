@@ -13,6 +13,8 @@ const placeholderImages = [
 ]
 
 const certificateImages = [
+  { src: '/gallery/certificates/Cert-deploma.jpg', title: 'Diploma', desc: 'College diploma awarded upon completion of my degree program.', category: 'Certificate of Completion' },
+  { src: '/gallery/certificates/cert-2nd-progSimulation.jpg', title: 'Programming Simulation', desc: '2nd place certificate from the programming simulation competition.', category: 'Certificate of Recognition' },
   { src: '/gallery/certificates/vice.png', title: 'Vice Mayor Award', desc: 'Awarded to Vice Mayor for outstanding student leadership.', category: 'Certificate of Appreciation' },
   { src: '/gallery/certificates/salesforce.png', title: 'Salesforce Internship', desc: 'Awarded by Smartbridge team from India for completing Salesforce Virtual Internship Program.', category: 'Certificate of Completion' },
   { src: '/gallery/certificates/EthicalHacking.png', title: 'Hacking Workshop', desc: 'Completion of the Ethical Hacking and Cybersecurity workshop.', category: 'Certificate of Participation' },
@@ -73,7 +75,14 @@ const tictactoeImages = [
   '/gallery/projects/tictactoe/react_ttt.png',
 ]
 
+const graduationImages = [
+  '/gallery/others/grad1.jpg',
+  '/gallery/others/grad2.jpg',
+  '/gallery/others/profile.jpg',
+]
+
 const otherImages = [
+  { src: graduationImages[0], title: 'Graduation', desc: 'Photos from my college graduation ceremony.', category: 'Graduation', images: graduationImages },
   { src: '/gallery/others/teamD.jpg', title: 'Team Destineer', desc: 'Team Destineer pitching an innovative project on technofair A.Y. 2024-2025.', category: 'Team Activity' },
   { src: '/gallery/others/pitching.jpg', title: 'Pitching Participation Award', desc: 'Awarded for participating in the pitching event.', category: 'Presentation' },
 ]
@@ -156,6 +165,14 @@ const Gallery = () => {
       openSlider(proj.images, 0)
     } else if (proj.img) {
       setSelectedImage(proj.img)
+    }
+  }
+
+  const handleOtherClick = (item) => {
+    if (item.images && item.images.length > 1) {
+      openSlider(item.images, 0)
+    } else {
+      setSelectedImage(item.src)
     }
   }
 
@@ -386,6 +403,9 @@ const Gallery = () => {
                     className="bg-[#2d0a52] rounded-2xl shadow-2xl w-full max-w-xs flex flex-col items-center border-4 border-purple-700 relative cursor-pointer"
                     style={{minHeight: '260px'}}
                   >
+                    {idx === 0 && !expanded.others && (
+                      <div className="font-pixel absolute top-4 right-4 bg-blue-200 text-xs font-bold text-black px-3 py-1 rounded-md shadow-md tracking-widest">NEW</div>
+                    )}
                     {/* Item image */}
                     <div className="w-full flex justify-center mt-6 mb-2 px-6">
                       <img
@@ -393,7 +413,7 @@ const Gallery = () => {
                         alt={item.title}
                         className="w-full h-32 object-cover rounded-lg bg-[#1a0033] border-2 border-yellow-300 shadow-lg"
                         style={{ imageRendering: 'pixelated' }}
-                        onClick={() => setSelectedImage(item.src)}
+                        onClick={() => handleOtherClick(item)}
                       />
                     </div>
                     {/* Subtitle (title) */}
@@ -405,7 +425,7 @@ const Gallery = () => {
                       <span className="font-pixel text-purple-200 text-xs font-semibold bg-purple-900 bg-opacity-60 rounded px-2 py-1">{item.category}</span>
                       <button
                         className="font-pixel bg-purple-400 text-white text-xs font-bold px-4 py-2 rounded-md hover:bg-purple-300 transition-colors duration-200"
-                        onClick={() => setSelectedImage(item.src)}
+                        onClick={() => handleOtherClick(item)}
                       >
                         VIEW
                       </button>
